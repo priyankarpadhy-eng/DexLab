@@ -1,0 +1,21 @@
+{
+  "name": "dexlab",
+  "version": "1.0.0",
+  "description": "DexLab - Master Design Through Practice",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "start": "python -m http.server 3000",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [
+    "design",
+    "bim", 
+    "mechanical",
+    "electrical",
+    "engineering",
+    "learning"
+  ],
+  "author": "DexLab",
+  "license": "MIT"
+}

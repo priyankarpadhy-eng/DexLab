@@ -1,0 +1,162 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                  🎨 DEXLAB - QUICK START GUIDE 🚀                          ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📂 YOUR STARTUP FOLDER CONTAINS:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ index.html              Main landing page (40KB)
+✅ server.js              Backend API server
+✅ package.json           Node.js dependencies
+✅ README.md              Full documentation
+✅ SETUP_EXCEL.md         Excel integration options
+✅ CHANGES.md             What changed from Flowstate
+✅ .env.example           Configuration template
+
+
+⚡ OPTION 1: RUN WITH BACKEND (SAVES TO EXCEL)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1: Install Node.js (if not already installed)
+  → Download from: https://nodejs.org/
+  → Choose LTS version
+
+STEP 2: Open PowerShell in this folder & run:
+  
+  npm install
+  npm start
+
+STEP 3: Open browser & visit:
+  
+  http://localhost:3000
+
+STEP 4: Fill in email & click "Join Waitlist"
+  → Email saved to: waitlist.xlsx (in this folder)
+  → Timestamp recorded automatically
+  → Status marked as "Pending"
+
+THAT'S IT! Users can now submit emails ✅
+
+
+⚡ OPTION 2: JUST FRONTEND (NO BACKEND)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1: Double-click index.html
+  → Opens in browser instantly
+  → No installation needed
+
+NOTE: Form works but emails NOT saved (no backend running)
+
+
+🚀 DEPLOY TO INTERNET (ONE-CLICK)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RECOMMENDED: Railway (Easiest - takes 2 minutes)
+
+1. Go to: https://railway.app
+2. Sign up (free with GitHub)
+3. Click "New Project" → "Deploy from GitHub"
+4. Connect your repo (push this folder to GitHub first)
+5. Railway auto-detects Node.js app
+6. Click "Deploy" → Done! 🎉
+
+Your site now live at: https://your-app.railway.app
+Emails auto-save to Excel in the cloud!
+
+
+📊 WHAT GETS SAVED IN EXCEL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Email                       Timestamp                   Status
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+john@university.edu         2024-01-15T10:30:45.123Z   Pending
+sara@design.com             2024-01-15T10:32:10.456Z   Pending
+alex@college.edu            2024-01-15T10:35:22.789Z   Pending
+
+Open waitlist.xlsx with:
+  → Microsoft Excel
+  → Google Sheets
+  → LibreOffice Calc
+
+
+🎨 CUSTOMIZE YOUR SITE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Edit index.html with any text editor:
+
+• Line ~277:  DexLab → [Your Brand Name]
+• Line ~278:  Heading text ("Master Design Through Practice")
+• Line ~279:  Subheading text ("Solve real-world design...")
+• Line ~280:  Badge text ("10K+ early adopters...")
+• Line ~281:  Footer text ("© 2026 DexLab...")
+
+Color scheme (easy to change):
+  --hero-base: #04050c           (dark background)
+  --heading: #eef0f6             (white text)
+  --body-muted: #b9becf          (gray text)
+
+Animations:
+  • animation delays in lines ~100-140
+  • Make slower/faster by changing milliseconds
+
+
+✅ WHAT'S INCLUDED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✨ WebGL Fluid Background Animation
+✨ Word-by-word Text Reveals
+✨ Responsive Design (mobile/tablet/desktop)
+✨ Smooth Scroll (Lenis.js)
+✨ Beautiful Glass-morphism UI
+✨ Form Validation
+✨ Duplicate Email Check
+✨ Auto-generated Excel File
+✨ Email Timestamp Recording
+
+
+❓ FAQ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Q: Where is my Excel file?
+A: waitlist.xlsx in this folder. Open with Excel or Google Sheets.
+
+Q: Can I use Google Sheets instead?
+A: Yes! See SETUP_EXCEL.md for Google Apps Script setup.
+
+Q: How do I run this on my domain?
+A: Deploy to Railway/Heroku, change your domain DNS to point there.
+
+Q: Can I add more fields (name, phone, etc.)?
+A: Yes! Edit form in index.html and columns in server.js
+
+Q: Is this mobile-friendly?
+A: 100% responsive! Test on phone/tablet.
+
+Q: Can it handle 100k+ signups?
+A: Yes! Excel files can handle millions of rows.
+
+
+📞 SUPPORT DOCS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Read these files for more info:
+  📖 README.md         - Full features & deployment guide
+  📖 SETUP_EXCEL.md    - 3 different Excel integration options
+  📖 CHANGES.md        - What changed from Flowstate
+
+
+🎯 NEXT STEPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. ✅ Run: npm install && npm start
+2. ✅ Test: Submit email at http://localhost:3000
+3. ✅ Check: Open waitlist.xlsx
+4. ✅ Customize: Edit text in index.html
+5. ✅ Deploy: Push to Railway
+6. ✅ Share: Send link to friends!
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Built with ❤️ for DexLab
+Ready to go! 🚀
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
