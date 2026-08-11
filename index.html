@@ -2330,23 +2330,27 @@
   <script type="module">
     import Lenis from 'lenis';
 
-    // 1) Init smooth scroll
-    const lenis = new Lenis({ smoothWheel: true });
-    function raf(t) {
-      lenis.raf(t);
+    // 1) Init smooth scroll (disabled on mobile for native inertial scrolling performance)
+    const isMobileDevice = window.innerWidth < 768;
+    const lenis = !isMobileDevice ? new Lenis({ smoothWheel: true }) : null;
+    
+    if (lenis) {
+      function raf(t) {
+        lenis.raf(t);
+        requestAnimationFrame(raf);
+      }
       requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
 
     // Scroll locking / unlocking
     window.lockScroll = function() {
-      lenis.stop();
+      if (lenis) lenis.stop();
       document.documentElement.style.position = 'relative';
       document.documentElement.style.overflow = 'hidden';
       document.documentElement.style.height = '100%';
     };
     window.unlockScroll = function() {
-      lenis.start();
+      if (lenis) lenis.start();
       document.documentElement.style.position = '';
       document.documentElement.style.overflow = '';
       document.documentElement.style.height = '';
@@ -2373,7 +2377,11 @@
           e.preventDefault();
           const target = document.querySelector(targetId);
           if (target) {
-            lenis.scrollTo(target);
+            if (lenis) {
+              lenis.scrollTo(target);
+            } else {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }
           }
         }
       });
@@ -2419,6 +2427,7 @@
 
     // Inview Intersection Observer
     function initInviewReveal() {
+      const isMobile = window.innerWidth < 768;
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -2426,7 +2435,7 @@
             observer.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.15 });
+      }, { threshold: isMobile ? 0.04 : 0.15 });
 
       document.querySelectorAll('.inview').forEach(el => {
         observer.observe(el);
@@ -2573,14 +2582,15 @@
     // 5) GSAP Scroll Highlight
     gsap.registerPlugin(ScrollTrigger);
     
+    const isMobileScrub = window.innerWidth < 768;
     gsap.to("#scroll-highlight-text .highlight-word", {
       color: "#0a0a0a", // Target color: black
-      stagger: 0.18,
+      stagger: isMobileScrub ? 0.08 : 0.18,
       scrollTrigger: {
         trigger: "#scroll-highlight-text",
         start: "top 85%",
         end: "bottom 20%",
-        scrub: 2.2,
+        scrub: isMobileScrub ? 0.5 : 2.2,
       }
     });
 
