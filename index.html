@@ -2884,17 +2884,19 @@
     document.addEventListener('DOMContentLoaded', () => {
       const fluidCanvas = document.getElementById('hero-fluid-canvas');
       if (fluidCanvas && typeof WebGLFluid === 'function') {
+        const isMobile = window.innerWidth < 768;
+        
         WebGLFluid(fluidCanvas, {
           IMMEDIATE: true,
           TRIGGER: 'hover',
-          SIM_RESOLUTION: 128,
-          DYE_RESOLUTION: 512,
+          SIM_RESOLUTION: isMobile ? 64 : 128, // lower resolution on mobile for high frame rates
+          DYE_RESOLUTION: isMobile ? 256 : 512,
           DENSITY_DISSIPATION: 0.98,
           VELOCITY_DISSIPATION: 0.98,
           PRESSURE: 0.8,
           PRESSURE_ITERATIONS: 20,
           CURL: 30,
-          SPLAT_RADIUS: 0.3,
+          SPLAT_RADIUS: isMobile ? 0.45 : 0.3, // larger splat radius on mobile to be easily visible
           SPLAT_FORCE: 6000,
           SHADING: true,
           COLORFUL: true,
@@ -2912,6 +2914,65 @@
           SUNRAYS_RESOLUTION: 196,
           SUNRAYS_WEIGHT: 1.0
         });
+
+        if (isMobile) {
+          // Disable touch-blocking pointer events on mobile so users can scroll the website
+          fluidCanvas.style.pointerEvents = 'none';
+
+          let lastX = window.innerWidth / 2;
+          let lastY = window.innerHeight / 2;
+
+          const handleOrientation = (e) => {
+            const gamma = e.gamma || 0; // tilt left/right [-90, 90]
+            const beta = e.beta || 0;   // tilt front/back [-180, 180]
+
+            // Calculate target position based on typical phone holding angle (45 degrees tilt)
+            let targetX = window.innerWidth * (0.5 + gamma / 40);
+            let targetY = window.innerHeight * (0.5 + (beta - 45) / 40);
+
+            // Clamp inside viewport
+            targetX = Math.max(0, Math.min(window.innerWidth, targetX));
+            targetY = Math.max(0, Math.min(window.innerHeight, targetY));
+
+            // Smooth linear interpolation (lerp)
+            lastX += (targetX - lastX) * 0.15;
+            lastY += (targetY - lastY) * 0.15;
+
+            // Dispatch simulated pointermove & mousemove to target canvas
+            const rect = fluidCanvas.getBoundingClientRect();
+            const canvasX = lastX - rect.left;
+            const canvasY = lastY - rect.top;
+
+            const pEvent = new PointerEvent('pointermove', {
+              clientX: canvasX,
+              clientY: canvasY,
+              bubbles: true
+            });
+            const mEvent = new MouseEvent('mousemove', {
+              clientX: canvasX,
+              clientY: canvasY,
+              bubbles: true
+            });
+            fluidCanvas.dispatchEvent(pEvent);
+            fluidCanvas.dispatchEvent(mEvent);
+          };
+
+          // Ask permission on iOS if required, or bind listener directly on Android
+          if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === 'function') {
+            document.body.addEventListener('touchstart', function requestGyro() {
+              DeviceOrientationEvent.requestPermission()
+                .then(response => {
+                  if (response === 'granted') {
+                    window.addEventListener('deviceorientation', handleOrientation);
+                  }
+                })
+                .catch(console.error);
+              document.body.removeEventListener('touchstart', requestGyro);
+            });
+          } else {
+            window.addEventListener('deviceorientation', handleOrientation);
+          }
+        }
       }
     });
   </script>
