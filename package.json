@@ -1,21 +1,25 @@
 {
-  "name": "dexlab",
+  "name": "startup",
   "version": "1.0.0",
-  "description": "DexLab - Master Design Through Practice",
-  "main": "index.html",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "python -m http.server 3000",
-    "start": "python -m http.server 3000",
-    "build": "echo 'Static site - no build needed'"
+    "dev": "node server.js",
+    "start": "node server.js"
   },
-  "keywords": [
-    "design",
-    "bim", 
-    "mechanical",
-    "electrical",
-    "engineering",
-    "learning"
-  ],
-  "author": "DexLab",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/priyankarpadhy-eng/DexLab.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/priyankarpadhy-eng/DexLab/issues"
+  },
+  "homepage": "https://github.com/priyankarpadhy-eng/DexLab#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
 }
